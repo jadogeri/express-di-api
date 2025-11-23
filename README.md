@@ -28,30 +28,22 @@ This is a backend Application temnplate implemting inversion of control, depende
 ## Table of Contents
 
 <ul>
-      <li><a href="#1-introduction">1. Introduction</a>
-        <ul>
-          <li><a href="#11-purpose">1.1 Purpose</a> </li>
-        </ul>
-      </li>
-    </ul>
-     <ul>
-      <li><a href="#5-installation">2. Installation</a>
-      </li>
-    </ul> 
-    <ul>
-        <li><a href="#6-usage">3. Usage</a>
-        <ul>
-            <li><a href="#61-run-application">3.1 Run Application</a> </li>
-            <ul>
-              <li><a href="#611-run-locally">3.1.1 Run Locally</a> </li>
-            </ul>
-        </ul>
-        </li>
-    </ul> 
-    <ul> 
-        <li><a href="#10-references">4. References</a>
-        </li>
-    <ul>
+    <li><a href="#1-introduction">1. Introduction</a>
+      <ul>
+        <li><a href="#11-purpose">1.1 Purpose</a> </li>
+      </ul>
+    </li>
+    <li><a href="#2-installation">2. Installation</a>  </li>
+    <li><a href="#3-usage">3. Usage</a>
+      <ul>
+          <li><a href="#31-run-application">3.1 Run Application</a> </li>
+          <ul>
+            <li><a href="#311-run-locally">3.1.1 Run Locally</a> </li>
+          </ul>
+      </ul>
+    </li>
+    <li><a href="#4-api-documentation">4. API Documentation</a> </li>
+    <li><a href="#5-references">5. References</a> </li>
 </ul>
 
 ## **1. Introduction**
@@ -99,10 +91,20 @@ This document outlines the components, and design considerations for functionali
 ```bash
   npm start
 ```
-
 ---
 
-## **4. References**
+#### 4 API Documentation ####
+
+| Method        | Description    | Endpoint                                        | Body      | Param       |
+| ----------- | ------ | -------------------------------------------------- | ------------------------ |------------------------ |
+| `GET`       | Returns all users | `http:localhost:4000/users/` | none       |   none          |             
+| `GET` | Return single user | `http:localhost:4000/users/:id` | none  |  id e.g `69228e6b8f9f98a7327b2d7a` |   
+| `POST`   | Creates a user | `http:localhost:4000/users/` | e.g `{"username": "john doe", "email":"johndoe@gmail.com"}`    | none |                      
+| `PUT`| Updates a user | `http:localhost:4000/users/:id` | e.g `{"username": "john doe", "email":"johndoe@gmail.com"}` |  id e.g `69228e6b8f9f98a7327b2d7c`    |  
+| `DELETE`| Removes a user |`http:localhost:4000/users/:id`  | none  | id e.g `69228e6b8f9f98a7327b2d7b`    |     
+
+
+## **5. References**
 * npm : [IoC Container for Typescript - 3.X)](https://www.npmjs.com/package/typescript-ioc).
 * FreeCodeCamp : [Frontend Web Development: (HTML, CSS, JavaScript, TypeScript, React)](https://www.youtube.com/watch?v=MsnQ5uepIa).
 * AweSome Open Source : [Awesome Readme Templates](https://awesomeopensource.com/project/elangosundar/awesome-README-templates)
