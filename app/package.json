@@ -1,0 +1,63 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "express app built with typescript",
+  "keywords": [
+    "typescript",
+    "express",
+    "dependency",
+    "injection"
+  ],
+  "homepage": "https://github.com/jadogeri/express-dependency-injection#readme",
+  "bugs": {
+    "url": "https://github.com/jadogeri/express-dependency-injection/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jadogeri/express-dependency-injection.git"
+  },
+  "license": "MIT",
+  "author": "Joseph Adogeri",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "unit": "jest --config=jest.config.unit.ts --testPathPattern=\"\\.unit\\.test\\.ts$\" --colors --verbose --detectOpenHandles --runInBand --forceExit",
+    "start": "node ./dist/server.js",
+    "prod": "nodemon ./src/server.ts",
+    "dev": "npm run swagger && ts-node-dev ./src/server.ts",
+    "watch": "nodemon --exec ts-node -- ../server.ts",
+    "v2": "nodemon --exec npx ts-node ../server.ts",
+    "swagger": "ts-node src/swagger.ts",
+    "tsoa-swagger-example-ui": "   npx tsoa routes && npx tsoa spec",
+    "tsoa-build": "tsoa spec-and-routes && tsc",
+    "tsoa": "  tsoa spec"
+  },
+  "dependencies": {
+    "@tsoa/runtime": "^6.6.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "inversify": "^7.10.4",
+    "joi": "^18.0.2",
+    "mongoose": "^8.20.0",
+    "nodemon": "^3.1.11",
+    "reflect-metadata": "^0.2.2",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1",
+    "ts-node-dev": "^2.0.0",
+    "tsoa": "^6.6.0",
+    "typescript": "^5.9.3",
+    "typescript-ioc": "^3.2.2"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.1",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "@types/mongoose": "^5.11.96",
+    "@types/swagger-ui-express": "^4.1.8",
+    "ts-node": "^10.9.2"
+  }
+}
