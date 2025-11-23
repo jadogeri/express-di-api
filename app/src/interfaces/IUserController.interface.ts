@@ -5,6 +5,12 @@ export abstract class IUserController {
     
     abstract getUser(req: Request, res: Response) : Promise<void>;
 
+    abstract updateUser(req: Request, res: Response) : Promise<void>;
+
+
+    abstract deleteUser(req: Request, res: Response) : Promise<void>;
+
+
     abstract getUsers(req: Request, res: Response) : Promise<void>;
 
     abstract getRouter(): Router

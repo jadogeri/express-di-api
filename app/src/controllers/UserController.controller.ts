@@ -1,51 +1,86 @@
 // src/controller/UserController.ts
-import { Inject, Singleton } from 'typescript-ioc';
-import { Controller } from '../decorators';
+import { Singleton } from 'typescript-ioc';
+import { Autowired, Controller } from '../decorators';
 import { Request, Response, Router } from 'express';
 import { IUserController } from '../interfaces/IUserController.interface';
 import { IUserService } from '../interfaces/IUserService.interface';
-import { UserCreateType } from '../dto/UserCreateType.type';
-import { UserService } from '../services/UserService.service';
-    import { Route, Get, Controller as BaseController, Path, Query } from 'tsoa';
-import { inject } from 'inversify';
+import { CreateUserDto } from '../dto/request/CreateUserDto.dto';
+import { ErrorResponse } from '../entities/ErrorResponse.entity';
+import mongoose, { Types } from 'mongoose';
+import { UpdateUserDto } from '../dto/request/UpdateUserDto.dto';
 
 @Controller('/user')
-@Route("users")
 @Singleton
-export class UserController  extends BaseController implements IUserController{
-    @Inject
+export class UserController  implements IUserController{
+    @Autowired
     private userService!: IUserService;        
     
-    @Get("/")
-    public  async getUsers ( req: Request, res: Response) : Promise<void> {
+    public getUsers= async (_: Request, res: Response) => {
 
-           res.status(200).send(await this.userService.getAllUsers());
-        }
+        res.status(200).send(await this.userService.getAllUsers());
+    }
 
-    public getUser= async (req: Request, res: Response) => {
+    public getUser = async (req: Request, res: Response) => {
         console.log("params id: ", req.params.id)
- 
-            const user = await this.userService.getUserById(req.params.id);
-            if (user) {
-                res.status(200).send(user);
-            } else {
-                res.status(404).send('User not found');
-            }
+        if(!mongoose.isValidObjectId(req.params.id)){
+   
+            res.status(400).send(new ErrorResponse(400,"id must be valid"));
         }
+        const userObjectId = new Types.ObjectId(req.params.id)
+        const user = await this.userService.getUserById(userObjectId);
+        if (user) {
+            res.status(200).send(user);
+        } else {
+            res.status(404).send('User not found');
+        }
+    }
+
+    public updateUser = async (req: Request, res: Response) => {
+        console.log("params id: ", req.params.id)
+        if(!mongoose.isValidObjectId(req.params.id)){
+   
+            res.status(400).send(new ErrorResponse(400,"id must be valid"));
+        }
+        const userObjectId = new Types.ObjectId(req.params.id)
+        const reqBody: UpdateUserDto = req.body;
+        console.log("request bosy: ", reqBody)
+        if(!reqBody.username && !reqBody.email !){
+            res.status(400).send(new ErrorResponse(400,"username or email is required"));
+        }
+                console.log("before update ",reqBody)
+
+        const user = await this.userService.updateUser(userObjectId, reqBody);
+        console.log("after update ",user)
+        if (user) {
+            res.status(200).send(user);
+        } else {
+            res.status(404).send('User not found');
+        }
+    }
+
+    public deleteUser = async (req: Request, res: Response) => {
+        console.log("params id: ", req.params.id)
+        if(!mongoose.isValidObjectId(req.params.id)){
+   
+            res.status(400).send(new ErrorResponse(400,"id must be valid"));
+        }
+        const userObjectId = new Types.ObjectId(req.params.id)
+        const user = await this.userService.deleteUserById(userObjectId);
+        if (user) {
+            res.status(200).send(user);
+        } else {
+            res.status(404).send('User not found');
+        }
+    }
     public createUser = async  (req: Request, res: Response) => {
-            const user : UserCreateType = req.body;
-            console.log("user in body", user)
-            const newUser = await this.userService.createUser(user);
+            const createUserDto : CreateUserDto = req.body;
+            if(!createUserDto.email || !createUserDto.username)
+            res.status(400).send("All fields are required");
+
+            console.log("user in body", createUserDto)
+            const newUser = await this.userService.createUser(createUserDto);
             res.status(201).json(newUser);
         }
-
-          @Get("{userId}")
-  public async get(
-    @Path() userId: number,
-    @Query() name?: string
-  ): Promise<UserCreateType> {
-    return new UserService().getAllUsers();
-  } 
 
     getRouter(): Router {
         const router = Router();
@@ -53,6 +88,10 @@ export class UserController  extends BaseController implements IUserController{
         router.get('/', this.getUsers);
 
         router.get('/:id', this.getUser);
+
+        router.delete('/:id', this.deleteUser);
+
+        router.put('/:id', this.updateUser);
 
         router.post('/', this.createUser);
 

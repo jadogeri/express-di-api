@@ -1,5 +1,5 @@
 // src/decorators.ts
-import { Container } from 'typescript-ioc';
+import { Container, Inject } from 'typescript-ioc';
 
 export function Service(target: any) {
     Container.bind(target).to(target);
@@ -15,3 +15,8 @@ export function Controller(prefix: string = '/') {
         Reflect.defineMetadata('controller:prefix', prefix, target);
     };
 }
+
+/**
+ * Alias for the @Inject decorator to use @Autowired naming convention.
+ */
+export const Autowired = Inject;
