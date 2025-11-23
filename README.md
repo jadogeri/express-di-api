@@ -95,6 +95,8 @@ This document outlines the components, and design considerations for functionali
 
 #### 4 API Documentation ####
 
+Note: Assuming port is `4000`
+
 | Method        | Description    | Endpoint                                        | Body      | Param       |
 | ----------- | ------ | -------------------------------------------------- | ------------------------ |------------------------ |
 | `GET`       | Returns all users | `http:localhost:4000/users/` | none       |   none          |             

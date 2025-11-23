@@ -9,7 +9,7 @@ import { ErrorResponse } from '../entities/ErrorResponse.entity';
 import mongoose, { Types } from 'mongoose';
 import { UpdateUserDto } from '../dto/request/UpdateUserDto.dto';
 
-@Controller('/user')
+@Controller('/users')
 @Singleton
 export class UserController  implements IUserController{
     @Autowired

@@ -1,6 +1,7 @@
 import { app } from './app';
 
-const PORT = 4000;
+const PORT = process.env.EXPRESS_APP_PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on: http://localhost:${PORT}`);
   //console.log(`📚 API Documentation: http://localhost:${PORT}/api-docs`);

@@ -6,16 +6,16 @@ import * as bodyParser from "body-parser";
 import { Container } from 'typescript-ioc';
 import { UserController } from './controllers/UserController.controller';
 import { configureIoC } from './configs/ioc.config';
-import dotenv from "dotenv";
+import * as dotenv from "dotenv";
 import cors from "cors"
 import { MongoDatabaseService } from './services/MongoDatabase.service';
 import { errorHandler } from './middlewares/errorHandler.middleware';
+dotenv.config();
 
 
 const dbService = Container.get(MongoDatabaseService);
 dbService.connect(); 
 
-dotenv.config();
 
 export const app = express();
 

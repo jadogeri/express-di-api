@@ -25,10 +25,11 @@
     "isolatedModules": true,
     "jsx": "react-jsx",
     "rootDir": ".",
-    "typeRoots": ["./node_modules/@types","./server.d.ts"]
+    "typeRoots": ["./node_modules/@types"]
+
   },
     "include": [
-    "./src/**/*.ts", "/*.d.ts" ],
+    "./src/**/*.ts", "server.d.ts" ],
   "exclude": ["./node_modules/*","node_modules"],
 }
 
