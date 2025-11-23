@@ -17,6 +17,10 @@ This is a backend Application temnplate implemting inversion of control, depende
 
 - [source code ](https://github.com/jadogeri/express-di-api.git)
 
+## Environment Variables 
+
+Note: use file .env.sample as template (or rename to .env) for global variables.
+
 ## Screenshots
 
 ---
