@@ -45,8 +45,6 @@ export class UserController  implements IUserController{
         if(!reqBody.username && !reqBody.email !){
             res.status(400).send(new ErrorResponse(400,"username or email is required"));
         }
-                console.log("before update ",reqBody)
-
         const user = await this.userService.updateUser(userObjectId, reqBody);
         console.log("after update ",user)
         if (user) {
