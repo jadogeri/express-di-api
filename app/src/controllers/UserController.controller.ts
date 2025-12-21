@@ -36,7 +36,6 @@ export class UserController  implements IUserController{
     }
 
     public updateUser = async (req: Request, res: Response) => {
-        console.log("params id: ", req.params.id)
         if(!mongoose.isValidObjectId(req.params.id)){
    
             res.status(400).send(new ErrorResponse(400,"id must be valid"));
