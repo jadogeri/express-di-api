@@ -43,7 +43,6 @@ export class UserController  implements IUserController{
         }
         const userObjectId = new Types.ObjectId(req.params.id)
         const reqBody: UpdateUserDto = req.body;
-        console.log("request bosy: ", reqBody)
         if(!reqBody.username && !reqBody.email !){
             res.status(400).send(new ErrorResponse(400,"username or email is required"));
         }
