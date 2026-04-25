@@ -1,6 +1,5 @@
 import {CreateUserDto} from "./src/dto/request/CreateUserDto.dto";
-import {UpdateUserDto} from "./src/dto/request/UpdateUserDto.dto"
-;
+import {UpdateUserDto} from "./src/dto/request/UpdateUserDto.dto";
 
 declare global {
     namespace Express {
